@@ -18,22 +18,19 @@ class BooksController < ApplicationController
       flash[:notice] = 'successfully'
       redirect_to book_path(@book.id)
     else
-      flash[:notice] = "error"
+      @error = create_error
       @books = Book.all
       render :index
     end
   end
   
   def update
-    book = Book.find(params[:id])
-    if book.update(book_params)
+    @book = Book.find(params[:id])
+    if @book.update(book_params)
       flash[:notice] = 'successfully'
-      redirect_to book_path(book.id)
+      redirect_to book_path(@book.id)
     else
-      @book = Book.find(book.id)
-      @book.title = ''
-      @book.body = ''
-      flash[:notice] = "error"
+      @error = create_error
       render :edit
     end
   end
@@ -48,4 +45,9 @@ class BooksController < ApplicationController
   def book_params
    params.require(:book).permit(:title, :body)
   end
+  
+  private
+    def create_error
+      "error"
+    end
 end

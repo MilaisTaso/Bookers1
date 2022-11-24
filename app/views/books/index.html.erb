@@ -1,9 +1,12 @@
-<h1>Books</h1>
-<table>
+<div class="index-content m-4">
+<div class="m-4 index-wrapper">
+    
+<h1 class= "fs-3 fw-bold mb-2">Books</h1>
+<table class="mb-4">
     <thead>
         <tr>
-            <th>Title</th>
-            <th>Body</th>
+            <th class="text-center">Title</th>
+            <th class="text-center">Body</th>
             <th></th>
         </tr>
     </thead>
@@ -12,35 +15,40 @@
 <tr>
     <td><%= book.title %></td>
     <td><%= book.body %></td>
-    <td><%= link_to 'show',book_path(book.id) %></td>
-    <td><td><%= link_to 'edit',edit_book_path(book.id) %></td></td>
-    <td><%= link_to 'Destroy',book_path(book.id), method: :delete %></td>
+    <td class="px-2" ><%= link_to 'show',book_path(book.id) %></td>
+    <td class="px-2"><%= link_to 'edit',edit_book_path(book.id) %></td>
+    <td class="px-2"><%= link_to 'Destroy',book_path(book.id), method: :delete %></td>
 </tr>
     <% end %>
     </tbody>
 </table>
 <% if @book.errors.any? %>
-<p>
-<div>
-<%= flash[:notice] %>
-</div>
+<div class="errors-area border border-danger">
+    
+<h2 class="text-center bg-danger text-white h6 pb-1">
+<%= @error %>
+</h6>
+<p class="ms-4 mb-2">
 <%= @book.errors.count %>件のエラーが発生しました
 </p>
-<ul>
+<ul class="ms-3">
     <% @book.errors.full_messages.each do |message| %>
     <li><%= message %></li>
     <% end %>
 </ul>
+</div>
 <% end %>
-<h2>New book</h2>
+<h2 class="my-4 h4 fw-bold">New book</h2>
 <%= form_with model:@book do |f| %>
-<div>
-<label>Title</label>
+<div class="mb-2">
+<label class="d-block">Title</label>
 <%= f.text_field :title %>
 </div>
-<div>
-<label>Body</label>
+<div class="mb-2"v>
+<label class="d-block">Body</label>
 <%= f.text_area :body %>
 </div>
 <%= f.submit 'Create Book' %>
 <% end %>
+</div>
+</div>
